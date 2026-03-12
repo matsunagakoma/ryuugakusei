@@ -14,7 +14,8 @@ const Login: React.FC = () => {
     setError('');
     setLoading(true);
 
-    const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+    const baseUrl = import.meta.env.VITE_API_URL || '';
+    const endpoint = isLogin ? `${baseUrl}/api/auth/login` : `${baseUrl}/api/auth/register`;
 
     try {
       const res = await fetch(endpoint, {

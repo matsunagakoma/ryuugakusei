@@ -20,8 +20,10 @@ const MyPage: React.FC = () => {
       }
 
       try {
+        const baseUrl = import.meta.env.VITE_API_URL || '';
+        
         // Fetch user data
-        const userRes = await fetch('/api/user/me', {
+        const userRes = await fetch(`${baseUrl}/api/user/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -30,7 +32,7 @@ const MyPage: React.FC = () => {
         setUser(userData.user);
 
         // Fetch dashboard stats
-        const statsRes = await fetch('/api/dashboard/stats', {
+        const statsRes = await fetch(`${baseUrl}/api/dashboard/stats`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         

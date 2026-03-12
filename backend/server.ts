@@ -5,10 +5,15 @@ import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-const JWT_SECRET = 'super-secret-key-for-global-connect-demo'; // In production, use process.env
+const PORT = process.env.PORT || 3001; // Render will use process.env.PORT
+const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-for-global-connect-demo'; 
 
-app.use(cors());
+// Allow all origins for the demo deployment
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Initialize SQLite Database
